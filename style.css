@@ -1,0 +1,357 @@
+/* ---------------- RESET ---------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100dvh; /* altezza schermo reale su mobile e desktop */
+  overflow: hidden; /* 👈 nessuno scroll */
+}
+
+/* ---------------- BASE ---------------- */
+:root {
+  --beige: #1e1a24;
+  --light-bg: #f6e7c1;
+  --text-dark: #2b2533;
+  --violet-1: #e5d4ff;
+  --violet-2: #b78cff;
+  --yellow: #ffd86a;
+  --bonus: #3c3645;
+}
+
+body {
+  font-family: "Poppins", "Arial Black", sans-serif;
+  background-color: var(--light-bg);
+  color: var(--text-dark);
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* ---------------- NAVBAR ---------------- */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #6b1c8c;
+  padding: 10px 20px;
+  flex-shrink: 0;
+  z-index: 50;
+}
+
+.logo-left img {
+  height: 40px;
+  display: block;
+}
+
+/* ---------------- MENU BUTTON ---------------- */
+.menu-btn {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 70;
+}
+
+.menu-btn span {
+  display: block;
+  height: 3px;
+  width: 100%;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform 0.28s ease, opacity 0.2s ease;
+  transform-origin: center;
+}
+
+.menu-btn.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+.menu-btn.active span:nth-child(2) {
+  opacity: 0;
+  transform: translateX(-10px);
+}
+.menu-btn.active span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+/* ---------------- SIDEBAR ---------------- */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 270px;
+  height: 100vh;
+  background-color: #6b1c8c;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  transition: right 0.38s cubic-bezier(0.2, 0.9, 0.2, 1);
+  z-index: 30;
+  padding: 40px 20px;
+}
+
+.sidebar.open {
+  right: 0;
+}
+
+.sidebar a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.22s;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  color: var(--yellow);
+}
+
+/* ---------------- OVERLAY ---------------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.28);
+  z-index: 29;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+
+.overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ---------------- MAIN ---------------- */
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100dvh - 70px - 60px); /* 👈 togli navbar e footer */
+  overflow: hidden;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  text-align: center;
+  justify-content: center;
+}
+
+/* Logo centrale */
+.logo-center img {
+  width: 160px;
+  height: auto;
+}
+
+/* Input area */
+.input-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+textarea {
+  width: 320px;
+  max-width: 80vw;
+  height: 90px;
+  border-radius: 20px;
+  border: none;
+  padding: 12px 14px;
+  background: #fff8ea;
+  resize: none;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.07);
+  font-size: 1rem;
+}
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 10px var(--yellow);
+}
+
+.send-btn {
+  background: var(--yellow);
+  border: none;
+  border-radius: 20px;
+  padding: 10px 26px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.14s ease, box-shadow 0.14s ease;
+}
+.send-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}
+
+/* Box “Storia del Giorno” */
+.story-box {
+  background: #fff8ea;
+  color: var(--text-dark);
+  padding: 25px 50px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  transition: transform 0.18s ease;
+}
+.story-box:hover {
+  transform: translateY(-6px);
+}
+
+/* ---------------- FOOTER ---------------- */
+footer {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff8ea;
+  border-top: 2px solid #6b1c8c;
+  padding: 10px 25px;
+  height: 60px;
+  position: relative;
+  z-index: 50;
+}
+
+.footer-left,
+.footer-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.footer-left {
+  left: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-right {
+  right: 25px;
+}
+
+.footer-center {
+  text-align: center;
+}
+
+.footer-logo {
+  width: 45px;
+  height: auto;
+}
+
+.icon {
+  width: 25px;
+  height: auto;
+}
+
+/* ---------------- THEME TOGGLE ---------------- */
+#theme-toggle {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--yellow);
+  color: #2b2533;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 120;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  transition: transform 0.14s ease, background 0.18s ease, box-shadow 0.18s ease;
+}
+
+/* Mobile fix */
+@media (max-width: 768px) {
+  #theme-toggle {
+    bottom: -4px;  /* 👈 scende ancora più giù su mobile */
+    right: -2px;
+    width: 48px;
+    height: 48px;
+  }
+}
+
+#theme-toggle:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+}
+
+/* ---------------- DARK MODE ---------------- */
+body.dark {
+  background: #1e1a24;
+  color: var(--violet-1);
+}
+
+body.dark .navbar {
+  background: #3c3645;
+}
+
+body.dark .sidebar {
+  background: #3c3645;
+}
+
+body.dark .sidebar a {
+  color: var(--violet-1);
+}
+
+body.dark .sidebar a:hover,
+body.dark .sidebar a.active {
+  color: var(--yellow);
+}
+
+body.dark textarea {
+  background: #2b2533;
+  color: var(--violet-1);
+}
+
+body.dark .send-btn {
+  background: var(--violet-2);
+  color: #1e1a24;
+}
+
+body.dark .story-box {
+  background: #2b2533;
+  color: var(--violet-1);
+  box-shadow: 0 0 18px var(--violet-2);
+}
+
+body.dark footer {
+  background: #3c3645;
+  border-top: 2px solid var(--violet-2);
+}
+
+body.dark #theme-toggle {
+  background: var(--violet-2);
+  color: #1e1a24;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 520px) {
+  textarea {
+    width: 88vw;
+  }
+
+  .logo-center img {
+    width: 140px;
+  }
+
+  .sidebar {
+    width: 220px;
+  }
+}
