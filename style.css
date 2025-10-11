@@ -6,7 +6,10 @@
 }
 
 html, body {
-  height: 100%;
+  height: 100dvh; /* 👈 altezza dinamica per evitare taglio del footer */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 /* ---------------- BASE ---------------- */
@@ -26,8 +29,7 @@ body {
   color: var(--text-dark);
   display: flex;
   flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
+  justify-content: space-between;
   transition: background-color 0.35s ease, color 0.35s ease;
 }
 
@@ -69,7 +71,6 @@ body {
   transform-origin: center;
 }
 
-/* Animazione in X */
 .menu-btn.active span:nth-child(1) {
   transform: rotate(45deg) translateY(8px);
 }
@@ -138,6 +139,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: calc(100dvh - 70px); /* 👈 garantisce spazio per il footer */
 }
 
 .main-content {
@@ -155,7 +157,7 @@ main {
   display: block;
 }
 
-/* Input area (textarea + send button sotto) */
+/* Input area */
 .input-area {
   display: flex;
   flex-direction: column;
@@ -218,7 +220,7 @@ textarea:focus {
   align-items: center;
   justify-content: center;
   gap: 34px;
-  height: calc(100vh - 140px);
+  height: calc(100dvh - 140px);
   text-align: center;
 }
 
@@ -295,11 +297,10 @@ footer {
 }
 
 /* ---------------- THEME TOGGLE ---------------- */
-
 #theme-toggle {
   position: fixed;
-  bottom: -28px;   /* 👈 esattamente nell'angolo in basso a destra */
-  right: 0px;
+  bottom: 15px;
+  right: 15px;
   width: 54px;
   height: 54px;
   border-radius: 50%;
@@ -311,11 +312,21 @@ footer {
   justify-content: center;
   padding: 0;
   margin: 0;
-  z-index: 80; /* sempre sopra sidebar e overlay */
+  z-index: 120;
   box-shadow: 0 8px 26px rgba(0, 0, 0, 0.18);
   cursor: pointer;
   transition: transform 0.14s ease, background 0.18s ease, box-shadow 0.18s ease;
   -webkit-tap-highlight-color: transparent;
+}
+
+/* 👇 Mobile: tasto più basso e più piccolo */
+@media (max-width: 768px) {
+  #theme-toggle {
+    bottom: 4px;
+    right: 6px;
+    width: 48px;
+    height: 48px;
+  }
 }
 
 #theme-toggle svg {
@@ -327,6 +338,11 @@ footer {
 #theme-toggle:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+}
+
+body.dark #theme-toggle {
+  background: var(--violet-2);
+  color: #1e1a24;
 }
 
 /* ---------------- DARK MODE ---------------- */
@@ -381,11 +397,6 @@ body.dark .contact-item img {
   filter: brightness(0.92);
 }
 
-body.dark #theme-toggle {
-  background: var(--violet-2);
-  color: #1e1a24;
-}
-
 /* ---------------- RESPONSIVE ---------------- */
 @media (max-width: 520px) {
   textarea {
@@ -398,13 +409,6 @@ body.dark #theme-toggle {
 
   .contact-item img {
     width: 100px;
-  }
-
-  #theme-toggle {
-    width: 48px;
-    height: 48px;
-    bottom: 10px;
-    right: 18px;
   }
 
   .sidebar {
