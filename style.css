@@ -7,11 +7,11 @@
 
 html, body {
   width: 100%;
-  height: 100dvh; /* usa l'altezza dinamica reale */
-  overflow: hidden; /* 👈 niente scroll */
+  height: 100dvh; /* 👈 usa altezza dinamica reale */
+  overflow: hidden; /* ❌ elimina scroll */
 }
 
-/* ---------------- VARIABILI COLORI ---------------- */
+/* ---------------- BASE ---------------- */
 :root {
   --beige: #1e1a24;
   --light-bg: #f6e7c1;
@@ -22,26 +22,26 @@ html, body {
   --bonus: #3c3645;
 }
 
-/* ---------------- STRUTTURA BASE ---------------- */
 body {
   font-family: "Poppins", "Arial Black", sans-serif;
-  color: var(--text-dark);
   background-color: var(--light-bg);
-  display: grid;
-  grid-template-rows: auto 1fr auto; /* navbar - main - footer */
-  min-height: 100dvh;
+  color: var(--text-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100dvh;
   transition: background-color 0.35s ease, color 0.35s ease;
 }
 
 /* ---------------- NAVBAR ---------------- */
 .navbar {
-  background-color: #6b1c8c;
-  color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #6b1c8c;
   padding: 10px 20px;
   z-index: 50;
+  flex-shrink: 0;
 }
 
 .logo-left img {
@@ -49,7 +49,7 @@ body {
   display: block;
 }
 
-/* MENU */
+/* ---------------- MENU BUTTON ---------------- */
 .menu-btn {
   display: inline-flex;
   flex-direction: column;
@@ -63,11 +63,13 @@ body {
 }
 
 .menu-btn span {
+  display: block;
   height: 3px;
   width: 100%;
   background: #fff;
   border-radius: 2px;
   transition: transform 0.28s ease, opacity 0.2s ease;
+  transform-origin: center;
 }
 
 .menu-btn.active span:nth-child(1) {
@@ -75,6 +77,7 @@ body {
 }
 .menu-btn.active span:nth-child(2) {
   opacity: 0;
+  transform: translateX(-10px);
 }
 .menu-btn.active span:nth-child(3) {
   transform: rotate(-45deg) translateY(-8px);
@@ -93,8 +96,9 @@ body {
   justify-content: center;
   align-items: center;
   gap: 28px;
-  transition: right 0.4s ease;
+  transition: right 0.38s cubic-bezier(0.2, 0.9, 0.2, 1);
   z-index: 30;
+  padding: 40px 20px;
 }
 
 .sidebar.open {
@@ -105,6 +109,8 @@ body {
   color: #fff;
   text-decoration: none;
   font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.22s;
 }
 
 .sidebar a:hover,
@@ -122,34 +128,38 @@ body {
   pointer-events: none;
   transition: opacity 0.25s;
 }
+
 .overlay.show {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* ---------------- MAIN ---------------- */
+/* ---------------- MAIN AREA ---------------- */
 main {
+  flex: 1;
   display: flex;
-  justify-content: center;
   align-items: center;
-  overflow: hidden;
+  justify-content: center;
+  overflow: hidden; /* 👈 evita scroll */
 }
 
 .main-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 22px;
+  gap: 25px;
   text-align: center;
+  justify-content: center;
 }
 
-/* LOGO CENTRALE */
+/* Logo centrale */
 .logo-center img {
   width: 160px;
   height: auto;
+  display: block;
 }
 
-/* AREA INPUT */
+/* Input area */
 .input-area {
   display: flex;
   flex-direction: column;
@@ -159,7 +169,7 @@ main {
 
 textarea {
   width: 320px;
-  max-width: 80vw;
+  max-width: calc(80vw);
   height: 90px;
   border-radius: 20px;
   border: none;
@@ -167,6 +177,7 @@ textarea {
   background: #fff8ea;
   resize: none;
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.07);
+  font-size: 1rem;
 }
 textarea:focus {
   outline: none;
@@ -180,34 +191,76 @@ textarea:focus {
   padding: 10px 26px;
   font-weight: 600;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.14s ease, box-shadow 0.14s ease;
 }
 .send-btn:hover {
   transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
 }
 
-/* BOX STORIA */
+/* Box “Storia del Giorno” */
 .story-box {
   background: #fff8ea;
   color: var(--text-dark);
-  padding: 20px 40px;
+  padding: 25px 50px;
   border-radius: 20px;
-  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   text-decoration: none;
   transition: transform 0.18s ease;
 }
 .story-box:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
+}
+
+/* ---------------- CONTATTI ---------------- */
+.contact-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 34px;
+  height: calc(100dvh - 140px);
+  text-align: center;
+}
+
+.contact-page h1 {
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-item img {
+  width: 120px;
+  height: auto;
+  display: block;
+}
+
+.contact-item p {
+  font-size: 1rem;
+  font-weight: 600;
+  color: inherit;
+  margin-top: 4px;
 }
 
 /* ---------------- FOOTER ---------------- */
 footer {
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   background: #fff8ea;
   border-top: 2px solid #6b1c8c;
   padding: 10px 25px;
-  height: 60px;
+  height: 70px;
   position: relative;
   z-index: 50;
 }
@@ -237,18 +290,20 @@ footer {
 .footer-logo {
   width: 45px;
   height: auto;
+  display: block;
 }
 
 .icon {
   width: 25px;
   height: auto;
+  display: block;
 }
 
 /* ---------------- THEME TOGGLE ---------------- */
 #theme-toggle {
   position: fixed;
-  bottom: 0;
-  right: 0;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 6px); /* 👈 resta aderente anche su iPhone */
+  right: calc(env(safe-area-inset-right, 0px) + 8px);
   width: 54px;
   height: 54px;
   border-radius: 50%;
@@ -258,38 +313,62 @@ footer {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  padding: 0;
+  margin: 0;
   z-index: 120;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.18);
   cursor: pointer;
-  transition: transform 0.14s ease, background 0.18s ease;
+  transition: transform 0.14s ease, background 0.18s ease, box-shadow 0.18s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* MOBILE FIX — ancora più giù */
+/* 👇 Mobile fix: resta più basso e più piccolo */
 @media (max-width: 768px) {
   #theme-toggle {
-    bottom: -6px;  /* 👈 leggermente fuori per essere davvero nell’angolo */
-    right: -4px;
     width: 48px;
     height: 48px;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 2px);
+    right: calc(env(safe-area-inset-right, 0px) + 4px);
   }
+}
+
+#theme-toggle svg {
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
 }
 
 #theme-toggle:hover {
   transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+}
+
+body.dark #theme-toggle {
+  background: var(--violet-2);
+  color: #1e1a24;
 }
 
 /* ---------------- DARK MODE ---------------- */
 body.dark {
-  background: var(--beige);
+  background: #1e1a24;
   color: var(--violet-1);
 }
 
 body.dark .navbar {
-  background: var(--bonus);
+  background: #3c3645;
 }
 
 body.dark .sidebar {
-  background: var(--bonus);
+  background: #3c3645;
+}
+
+body.dark .sidebar a {
+  color: var(--violet-1);
+}
+
+body.dark .sidebar a:hover,
+body.dark .sidebar a.active {
+  color: var(--yellow);
 }
 
 body.dark textarea {
@@ -297,17 +376,45 @@ body.dark textarea {
   color: var(--violet-1);
 }
 
-body.dark footer {
-  background: #3c3645;
-  border-top: 2px solid var(--violet-2);
+body.dark .send-btn {
+  background: var(--violet-2);
+  color: #1e1a24;
 }
 
 body.dark .story-box {
   background: #2b2533;
   color: var(--violet-1);
+  box-shadow: 0 0 18px var(--violet-2);
 }
 
-body.dark #theme-toggle {
-  background: var(--violet-2);
-  color: #1e1a24;
+body.dark footer {
+  background: #3c3645;
+  border-top: 2px solid var(--violet-2);
+}
+
+body.dark .contact-item p {
+  color: var(--violet-1);
+}
+
+body.dark .contact-item img {
+  filter: brightness(0.92);
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 520px) {
+  textarea {
+    width: 88vw;
+  }
+
+  .logo-center img {
+    width: 140px;
+  }
+
+  .contact-item img {
+    width: 100px;
+  }
+
+  .sidebar {
+    width: 220px;
+  }
 }
