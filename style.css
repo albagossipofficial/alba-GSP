@@ -738,8 +738,8 @@ footer {
     #theme-toggle {
       width: 48px;
       height: 48px;
-      bottom: -28px !important;
-      right:  -6px !important;
+      bottom: -18px !important;
+      right:  -3px !important;
     }
   }
 }
