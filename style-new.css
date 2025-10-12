@@ -302,7 +302,7 @@ footer {
 /* ---------------- THEME TOGGLE (funziona su tutti i device) ---------------- */
 #theme-toggle {
   position: fixed !important;
-  bottom: -28px !important;
+  bottom: -35px !important;
   right: 18px !important;
   width: 54px;
   height: 54px;
@@ -405,12 +405,4 @@ body.dark #theme-toggle {
   transform: translateZ(0);
 }
 
-@media (max-width: 768px) {
-  #theme-toggle {
-    position: fixed !important;
-    bottom: -25px !important;   /* 👈 più piccolo = più vicino al bordo basso */
-    right: 8px !important;    /* 👈 più piccolo = più vicino al bordo destro */
-    width: 48px;
-    height: 48px;
-  }
-}
+
