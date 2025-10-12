@@ -703,7 +703,7 @@ footer {
 /* ---------------- THEME TOGGLE ---------------- */
 #theme-toggle {
   position: fixed;
-  bottom: -6px;
+  bottom: -28px;
   right: -6px;
   width: 54px;
   height: 54px;
@@ -739,7 +739,7 @@ footer {
       width: 48px;
       height: 48px;
       bottom: calc(env(safe-area-inset-bottom, 0px) - 3px);
-      right: calc(env(safe-area-inset-right, 0px) - 3px);
+      right: calc(env(safe-area-inset-right, 0px) 0px);
     }
   }
 }
