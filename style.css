@@ -17,21 +17,19 @@
   --bonus: #3c3645;
 }
 
-/* ---------- VIEWPORT FIX ---------- */
-html,
-body {
+/* ---------------- STRUTTURA BASE ---------------- */
+html, body {
   width: 100%;
   height: 100dvh;
-  margin: 0;
-  padding: 0;
   overflow: hidden;
-  overflow-x: clip; /* blocca allargamento su mobile */
+  overflow-x: clip;
   max-width: 100%;
   touch-action: manipulation;
   -webkit-text-size-adjust: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-/* ---------------- STRUCTURE ---------------- */
 body {
   font-family: "Poppins", "Arial Black", sans-serif;
   color: var(--text-dark);
@@ -53,7 +51,11 @@ body {
   padding: 10px 20px;
   z-index: 50;
 }
-.logo-left img { height: 40px; display: block; }
+
+.logo-left img {
+  height: 40px;
+  display: block;
+}
 
 /* ---------------- MENU ---------------- */
 .menu-btn {
@@ -67,6 +69,7 @@ body {
   cursor: pointer;
   z-index: 70;
 }
+
 .menu-btn span {
   height: 3px;
   width: 100%;
@@ -74,9 +77,16 @@ body {
   border-radius: 2px;
   transition: transform 0.28s ease, opacity 0.2s ease;
 }
-.menu-btn.active span:nth-child(1) { transform: rotate(45deg) translateY(8px); }
-.menu-btn.active span:nth-child(2) { opacity: 0; }
-.menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translateY(-8px); }
+
+.menu-btn.active span:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+.menu-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+.menu-btn.active span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
 
 /* ---------------- SIDEBAR ---------------- */
 .sidebar {
@@ -88,27 +98,44 @@ body {
   background-color: #6b1c8c;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* centrata tra header e footer */
+  justify-content: center;
   align-items: center;
   gap: 28px;
   transition: right 0.4s ease;
   z-index: 30;
 }
-.sidebar.open { right: 0; }
-.sidebar a { color: #fff; text-decoration: none; font-weight: 600; transition: color .2s;}
-.sidebar a:hover, .sidebar a.active { color: var(--yellow); }
+
+.sidebar.open {
+  right: 0;
+}
+
+.sidebar a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  color: var(--yellow);
+}
 
 /* ---------------- OVERLAY ---------------- */
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.28);
+  background: rgba(0, 0, 0, 0.28);
   z-index: 29;
   opacity: 0;
   pointer-events: none;
-  transition: opacity .25s;
+  transition: opacity 0.25s;
 }
-.overlay.show { opacity: 1; pointer-events: auto; }
+
+.overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
 
 /* ---------------- MAIN ---------------- */
 main {
@@ -116,8 +143,9 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: visible; /* permette le ombre su mobile */
+  overflow: visible;
 }
+
 .main-content {
   display: flex;
   flex-direction: column;
@@ -126,13 +154,21 @@ main {
   text-align: center;
 }
 
-/* logo */
-.logo-center img { width: 160px; height: auto; display:block; }
+/* Logo centrale */
+.logo-center img {
+  width: 160px;
+  height: auto;
+}
 
-/* input area */
-.input-area { display:flex; flex-direction:column; align-items:center; gap:12px; }
+/* Input area */
+.input-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
 
-/* textarea — manteniamo 80vw ma evitiamo zoom/allargamenti */
+/* Textarea fix */
 textarea {
   width: 320px;
   max-width: 80vw;
@@ -142,15 +178,18 @@ textarea {
   padding: 12px 14px;
   background: #fff8ea;
   resize: none;
-  box-shadow: inset 0 0 6px rgba(0,0,0,0.07);
-  font-size: 16px; /* evita zoom automatico su mobile */
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.07);
+  font-size: 16px;
   box-sizing: border-box;
   overflow-wrap: break-word;
   word-break: break-word;
 }
-textarea:focus { outline: none; box-shadow: 0 0 10px var(--yellow); }
 
-/* send */
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 10px var(--yellow);
+}
+
 .send-btn {
   background: var(--yellow);
   border: none;
@@ -158,51 +197,110 @@ textarea:focus { outline: none; box-shadow: 0 0 10px var(--yellow); }
   padding: 10px 26px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform .14s ease, box-shadow .14s ease;
+  transition: transform 0.14s ease, box-shadow 0.14s ease;
 }
-.send-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 22px rgba(0,0,0,0.15); }
 
-/* story box */
+.send-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15);
+}
+
+/* Story box */
 .story-box {
   background: #fff8ea;
   color: var(--text-dark);
   padding: 20px 40px;
   border-radius: 20px;
-  box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
   text-decoration: none;
-  transition: transform .18s ease, box-shadow .18s ease;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
-.story-box:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,0.15); }
 
-/* ---------------- CONTATTI ---------------- */
-.contact-page {
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:40px; height: calc(100dvh - 120px); text-align:center;
+.story-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
-.contact-item { display:flex; flex-direction:column; align-items:center; gap:10px; }
-.contact-item img { width:100px; height:auto; }
-.contact-item p { font-weight:600; color:inherit; font-size:1rem; }
+
+/* ---------------- PAGINA CONTATTI ---------------- */
+.contact-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  height: calc(100dvh - 120px);
+  text-align: center;
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-item img {
+  width: 100px;
+  height: auto;
+}
+
+.contact-item p {
+  font-weight: 600;
+  color: inherit;
+  font-size: 1rem;
+}
 
 /* ---------------- FOOTER ---------------- */
 footer {
   height: var(--footer-height);
-  display:flex; align-items:center; justify-content:center;
-  background:#fff8ea; border-top:2px solid #6b1c8c; padding:10px 25px;
-  position:relative; z-index:50; flex-shrink:0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff8ea;
+  border-top: 2px solid #6b1c8c;
+  padding: 10px 25px;
+  position: relative;
+  z-index: 50;
+  flex-shrink: 0;
 }
-.footer-left, .footer-right { position:absolute; top:50%; transform:translateY(-50%); }
-.footer-left { left:25px; display:flex; align-items:center; gap:10px; }
-.footer-right { right:25px; }
-.footer-center { text-align:center; }
-.footer-logo { width:45px; height:auto; display:block; }
-.icon { width:25px; height:auto; display:block; }
 
-/* ---------------- THEME TOGGLE (singola definizione, pulita) ---------------- */
-/* desktop: leggermente sollevato dal bordo per non essere tagliato */
+.footer-left,
+.footer-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.footer-left {
+  left: 25px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-right {
+  right: 25px;
+}
+
+.footer-center {
+  text-align: center;
+}
+
+.footer-logo {
+  width: 45px;
+  height: auto;
+}
+
+.icon {
+  width: 25px;
+  height: auto;
+}
+
+/* ---------------- THEME TOGGLE (funziona su desktop e mobile) ---------------- */
 #theme-toggle {
   position: fixed;
   bottom: -28px;
-  right: -6px;
+  right: 12px;
   width: 54px;
   height: 54px;
   border-radius: 50%;
@@ -213,50 +311,95 @@ footer {
   align-items: center;
   justify-content: center;
   z-index: 999;
-  box-shadow: 0 8px 22px rgba(0,0,0,0.18);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
   cursor: pointer;
-  transition: transform .14s ease, background .18s ease, box-shadow .18s ease;
+  transition: transform 0.14s ease, background 0.18s ease, box-shadow 0.18s ease;
   -webkit-tap-highlight-color: transparent;
 }
 
-/* hover */
 #theme-toggle:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 28px rgba(0,0,0,0.25);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
 }
-#theme-toggle svg { width:22px; height:22px; pointer-events:none; }
 
-/* safe-area (mobile): usiamo env, + piccolo offset per non tagliare */
-/* ---- FIX UNIVERSALE POSIZIONE MOBILE ---- */
+#theme-toggle svg {
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+}
+
+/* ---- POSIZIONE MOBILE OVERRIDE (funziona SEMPRE) ---- */
 @media (max-width: 768px) {
   #theme-toggle {
     position: fixed !important;
-    bottom: 16px !important;  /* 👈 distanza reale dal bordo su mobile */
-    right: 16px !important;
+    bottom: 18px !important;
+    right: 18px !important;
+    width: 48px;
+    height: 48px;
     z-index: 9999 !important;
   }
 }
 
-
 /* ---------------- DARK MODE ---------------- */
-body.dark { background: var(--beige); color: var(--violet-1); }
-body.dark .navbar { background: var(--bonus); }
-body.dark .sidebar { background: var(--bonus); }
-body.dark textarea { background: #2b2533; color: var(--violet-1); }
-body.dark .send-btn { background: var(--violet-2); color: #1e1a24; }
-body.dark .story-box { background: #2b2533; color: var(--violet-1); box-shadow: 0 0 18px var(--violet-2); }
-body.dark footer { background:#3c3645; border-top:2px solid var(--violet-2); }
-body.dark #theme-toggle { background:var(--violet-2); color:#1e1a24; }
+body.dark {
+  background: var(--beige);
+  color: var(--violet-1);
+}
+
+body.dark .navbar {
+  background: var(--bonus);
+}
+
+body.dark .sidebar {
+  background: var(--bonus);
+}
+
+body.dark textarea {
+  background: #2b2533;
+  color: var(--violet-1);
+}
+
+body.dark .send-btn {
+  background: var(--violet-2);
+  color: #1e1a24;
+}
+
+body.dark .story-box {
+  background: #2b2533;
+  color: var(--violet-1);
+  box-shadow: 0 0 18px var(--violet-2);
+}
+
+body.dark footer {
+  background: #3c3645;
+  border-top: 2px solid var(--violet-2);
+}
+
+body.dark #theme-toggle {
+  background: var(--violet-2);
+  color: #1e1a24;
+}
 
 /* ---------------- RESPONSIVE ---------------- */
 @media (max-width: 768px) {
-  textarea { width: 88vw; }
-  .logo-center img { width: 140px; }
-  .sidebar { width: 220px; }
-  .contact-item img { width: 80px; }
+  textarea {
+    width: 88vw;
+  }
+
+  .logo-center img {
+    width: 140px;
+  }
+
+  .sidebar {
+    width: 220px;
+  }
+
+  .contact-item img {
+    width: 80px;
+  }
 }
 
-/* ---------------- OMBRE (solo su elementi che le usano) ---------------- */
+/* ---------------- PERFORMANCE ---------------- */
 .story-box,
 .send-btn,
 #theme-toggle {
