@@ -18,7 +18,8 @@
 }
 
 /* ---------------- STRUTTURA BASE ---------------- */
-html, body {
+html,
+body {
   width: 100%;
   height: 100dvh;
   overflow: hidden;
@@ -168,7 +169,7 @@ main {
   gap: 12px;
 }
 
-/* Textarea fix */
+/* Textarea */
 textarea {
   width: 320px;
   max-width: 80vw;
@@ -190,6 +191,7 @@ textarea:focus {
   box-shadow: 0 0 10px var(--yellow);
 }
 
+/* Send button */
 .send-btn {
   background: var(--yellow);
   border: none;
@@ -199,13 +201,12 @@ textarea:focus {
   cursor: pointer;
   transition: transform 0.14s ease, box-shadow 0.14s ease;
 }
-
 .send-btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15);
 }
 
-/* Story box */
+/* Box storia del giorno */
 .story-box {
   background: #fff8ea;
   color: var(--text-dark);
@@ -215,7 +216,6 @@ textarea:focus {
   text-decoration: none;
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
-
 .story-box:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
@@ -296,11 +296,11 @@ footer {
   height: auto;
 }
 
-/* ---------------- THEME TOGGLE (funziona su desktop e mobile) ---------------- */
+/* ---------------- THEME TOGGLE (funziona su tutti i device) ---------------- */
 #theme-toggle {
-  position: fixed;
-  bottom: -28px;
-  right: 12px;
+  position: fixed !important;
+  bottom: -28px !important;
+  right: 18px !important;
   width: 54px;
   height: 54px;
   border-radius: 50%;
@@ -310,7 +310,7 @@ footer {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  z-index: 999;
+  z-index: 9999;
   box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
   cursor: pointer;
   transition: transform 0.14s ease, background 0.18s ease, box-shadow 0.18s ease;
@@ -326,18 +326,6 @@ footer {
   width: 22px;
   height: 22px;
   pointer-events: none;
-}
-
-/* ---- POSIZIONE MOBILE OVERRIDE (funziona SEMPRE) ---- */
-@media (max-width: 768px) {
-  #theme-toggle {
-    position: fixed !important;
-    bottom: -10px !important;
-    right: 18px !important;
-    width: 48px;
-    height: 48px;
-    z-index: 9999 !important;
-  }
 }
 
 /* ---------------- DARK MODE ---------------- */
@@ -396,6 +384,13 @@ body.dark #theme-toggle {
 
   .contact-item img {
     width: 80px;
+  }
+
+  #theme-toggle {
+    bottom: 18px !important;
+    right: 18px !important;
+    width: 48px;
+    height: 48px;
   }
 }
 
