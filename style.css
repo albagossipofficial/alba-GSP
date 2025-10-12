@@ -1,4 +1,7 @@
+body { background: limegreen !important; }
+
 /* ---------------- RESET ---------------- */
+
 * {
   box-sizing: border-box;
   margin: 0;
