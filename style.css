@@ -733,7 +733,7 @@ footer {
 }
 
 /* Mobile safe area fix */
-
+@supports (bottom: env(safe-area-inset-bottom)) {
   @media (max-width: 768px) {
     #theme-toggle {
       width: 48px;
@@ -742,7 +742,7 @@ footer {
       right:  calc(env(safe-area-inset-right, 0px) +6px);
     }
   }
-
+}
 
 /* ---------------- DARK MODE ---------------- */
 body.dark {
