@@ -702,9 +702,9 @@ footer {
 
 /* ---------------- THEME TOGGLE ---------------- */
 #theme-toggle {
-  position: fixed;
-  bottom: -28px;
-  right: -6px;
+  position: fixed !important;
+  bottom: -28px !important;
+  right: -6px !important;
   width: 54px;
   height: 54px;
   border-radius: 50%;
@@ -738,8 +738,8 @@ footer {
     #theme-toggle {
       width: 48px;
       height: 48px;
-      bottom: calc(env(safe-area-inset-bottom, -28px) -28px);
-      right: calc(env(safe-area-inset-right, 0px) -6px);
+      bottom: calc(env(safe-area-inset-bottom, 0px) -28px) !important;
+      right: calc(env(safe-area-inset-right, 0px) -6px) !important;
     }
   }
 }
