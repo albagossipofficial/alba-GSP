@@ -811,6 +811,3 @@ body.dark #theme-toggle {
   transform: translateZ(0);
 }
 
-* {
-  outline: 1px solid red !important;
-}
