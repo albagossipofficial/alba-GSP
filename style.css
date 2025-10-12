@@ -703,8 +703,8 @@ footer {
 /* ---------------- THEME TOGGLE ---------------- */
 #theme-toggle {
   position: fixed ;
-  bottom: -28px ;
-  right: -6px;
+  bottom: 28px ;
+  right: 6px;
   width: 54px;
   height: 54px;
   border-radius: 50%;
@@ -734,7 +734,14 @@ footer {
 
 /* Mobile safe area fix */
 
- 
+  @media (max-width: 768px) {
+    #theme-toggle {
+      width: 48px;
+      height: 48px;
+      bottom: calc(env(safe-area-inset-bottom, 0px) +28px);
+      right:  calc(env(safe-area-inset-right, 0px) -6px);
+    }
+  }
 
 
 /* ---------------- DARK MODE ---------------- */
