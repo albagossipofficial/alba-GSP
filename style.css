@@ -739,7 +739,7 @@ footer {
       width: 48px;
       height: 48px;
       bottom: -28px !important;
-      right: calc(env(safe-area-inset-right, 0px) -6px) !important;
+      right:  -6px !important;
     }
   }
 }
