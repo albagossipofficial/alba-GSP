@@ -6,6 +6,32 @@
   <title>ALBA GOSSIP</title>
   <link rel="stylesheet" href="style-new.css" />
 </head>
+<script>
+  (function forceThemeToggle() {
+    const el = document.getElementById('theme-toggle');
+    if (!el) return;
+    const apply = () => {
+      el.style.setProperty('position', 'fixed', 'important');
+      el.style.setProperty('bottom', '12px', 'important'); // cambia qui se vuoi
+      el.style.setProperty('right', '12px', 'important');
+      el.style.setProperty('width', '54px', 'important');
+      el.style.setProperty('height', '54px', 'important');
+      el.style.setProperty('z-index', '99999', 'important');
+    };
+    // Applica subito...
+    apply();
+    // ...e ripeti qualche volta per sovrascrivere script che girano dopo
+    [100, 300, 700, 1500].forEach(t => setTimeout(apply, t));
+    // infine osserva modifiche inline e ri-applica se qualcuno le cambia
+    const obs = new MutationObserver(m => {
+      m.forEach(record => {
+        if (record.type === 'attributes' && record.attributeName === 'style') apply();
+      });
+    });
+    obs.observe(el, { attributes: true, attributeFilter: ['style'] });
+  })();
+</script>
+
 <body>
   <header class="navbar" id="header">
     <div class="logo-left"><img src="svg/logo-alba-gossip.svg" alt="ALBA GOSSIP"></div>
