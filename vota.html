@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vota – ALBA GSP</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+.vote-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.vote-header {
+  background: #6b1c8c;
+  color: #fff;
+  padding: 14px 30px;
+  border-radius: 18px;
+  font-weight: 700;
+}
+
+.card-stack {
+  position: relative;
+  width: 320px;
+  aspect-ratio: 9 / 16;
+}
+
+.vote-card {
+  position: absolute;
+  inset: 0;
+  background: #fff8ea;
+  border-radius: 26px;
+  box-shadow: 0 12px 28px rgba(0,0,0,.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 26px;
+  text-align: center;
+  user-select: none;
+  touch-action: none;
+  transition: transform .25s ease;
+}
+
+.flash {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.flash.green {
+  background: linear-gradient(90deg, rgba(0,255,0,.45), transparent);
+}
+
+.flash.red {
+  background: linear-gradient(-90deg, rgba(255,0,0,.45), transparent);
+}
+
+.flash-show {
+  animation: flash .4s ease;
+}
+
+@keyframes flash {
+  from { opacity: .9 }
+  to { opacity: 0 }
+}
+
+.vote-actions {
+  display: flex;
+  justify-content: space-between;
+  width: 260px;
+}
+
+.vote-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+.like { background: #7cff7c; }
+.dislike { background: #ff7c7c; }
+</style>
+</head>
+
+<body>
+
+<header class="navbar">
+  <div class="logo-left"><img src="svg/logo-alba-gossip.svg" alt="ALBA GSP"></div>
+  <button class="menu-btn" id="menu-btn">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<div class="overlay" id="overlay"></div>
+
+<nav class="sidebar" id="sidebar">
+  <a href="alba-gsp.html" class="active">ALBA GSP</a>
+  <a href="storia del giorno.html">STORIA DEL GIORNO</a>
+  <a href="vota.html">VOTA</a>
+  <a href="contatti.html">CONTATTI</a>
+  <a href="#">TERMINI D’USO</a>
+  <a href="#">PRIVACY E POLICY</a>
+</nav>
+
+<main>
+  <div class="vote-page">
+
+    <div class="vote-header">ALBA GSP</div>
+
+    <div class="card-stack" id="cardStack">
+      <!-- Le card saranno inserite da JS -->
+    </div>
+
+    <div class="vote-actions">
+      <button class="vote-btn like" id="likeBtn">❤️</button>
+      <button class="vote-btn dislike" id="dislikeBtn">❌</button>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="footer-left">
+     <a href="https://www.instagram.com/alba__gossip" target="_blank"><img src="svg/logo-instagram.svg" class="icon"></a>
+    <span>@alba__gossip</span>
+  </div>
+
+  <div class="footer-center">
+    <img src="svg/logo-alba-gossip.svg" class="footer-logo">
+  </div>
+
+  <div class="footer-right">
+    <button id="theme-toggle" aria-label="Cambia tema" aria-pressed="false">
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"/>
+      </svg>
+    </button>
+  </div>
+</footer>
+
+<script>
+/* ---------------- MENU ---------------- */
+const menuBtn = document.getElementById("menu-btn");
+const sidebar = document.getElementById("sidebar");
+const overlay = document.getElementById("overlay");
+
+menuBtn.onclick = () => {
+  sidebar.classList.toggle("open");
+  overlay.classList.toggle("show");
+};
+overlay.onclick = () => {
+  sidebar.classList.remove("open");
+  overlay.classList.remove("show");
+};
+
+/* ---------------- THEME ---------------- */
+const themeToggle = document.getElementById("theme-toggle");
+const body = document.body;
+
+function setDarkMode(on){
+  body.classList.toggle("dark", on);
+  themeToggle.setAttribute("aria-pressed", on);
+  themeToggle.innerHTML = on
+    ? '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4M12 7a5 5 0 100 10 5 5 0 000-10z" stroke="currentColor" stroke-width="1.5"/></svg>'
+    : '<svg viewBox="0 0 24 24" fill="none"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"/></svg>';
+}
+
+setDarkMode(localStorage.getItem("theme") === "dark");
+themeToggle.onclick = () => {
+  const isDark = !body.classList.contains("dark");
+  setDarkMode(isDark);
+  localStorage.setItem("theme", isDark ? "dark" : "light");
+};
+
+/* ---------------- SWIPE CARDS ---------------- */
+const questions = [
+  "Domanda di esempio 1",
+  "Domanda di esempio 2",
+  "Domanda di esempio 3"
+];
+
+const cardStack = document.getElementById("cardStack");
+
+function createCard(text){
+  const card = document.createElement("div");
+  card.className = "vote-card";
+  card.innerHTML = `
+    <div class="flash green"></div>
+    <div class="flash red"></div>
+    <p>${text}</p>
+  `;
+  cardStack.appendChild(card);
+}
+
+questions.reverse().forEach(q => createCard(q)); // la prima domanda sopra
+
+let topCard = cardStack.lastElementChild;
+let startX = 0, currentX = 0, dragging = false;
+
+function updateCardPosition(dx){
+  topCard.style.transform = `translateX(${dx}px) rotate(${dx/15}deg)`;
+}
+
+function handleSwipe(direction){
+  if(!topCard) return;
+  const flash = direction === "like" ? topCard.querySelector(".flash.green") : topCard.querySelector(".flash.red");
+  flash.classList.add("flash-show");
+  topCard.style.transition = "transform 0.25s ease";
+
+  // carta va verso il lato corretto in base al voto
+  if(direction === "like"){
+    topCard.style.transform = "translateX(-140%) rotate(-14deg)"; // like = sinistra
+  } else {
+    topCard.style.transform = "translateX(140%) rotate(14deg)";  // dislike = destra
+  }
+
+  // invio dati
+  console.log("Hai votato:", topCard.querySelector("p").textContent, direction);
+
+  setTimeout(() => {
+    topCard.remove();
+    topCard = cardStack.lastElementChild;
+  }, 300);
+}
+
+cardStack.addEventListener("pointerdown", e => {
+  if(!topCard) return;
+  dragging = true;
+  startX = e.clientX;
+  topCard.style.transition = "none";
+  topCard.setPointerCapture(e.pointerId);
+});
+
+cardStack.addEventListener("pointermove", e => {
+  if(!dragging || !topCard) return;
+  currentX = e.clientX - startX;
+  updateCardPosition(currentX);
+});
+
+cardStack.addEventListener("pointerup", e => {
+  if(!topCard) return;
+  dragging = false;
+  if(currentX > 100){        // swipe a destra
+    handleSwipe("dislike");   // carta va a destra
+  } else if(currentX < -100){ // swipe a sinistra
+    handleSwipe("like");      // carta va a sinistra
+  } else {
+    topCard.style.transition = "transform 0.2s ease";
+    topCard.style.transform = "translateX(0) rotate(0)";
+  }
+  currentX = 0;
+});
+
+// pulsanti
+document.getElementById("likeBtn").onclick = () => handleSwipe("like");
+document.getElementById("dislikeBtn").onclick = () => handleSwipe("dislike");
+</script>
+
+</body>
+</html>

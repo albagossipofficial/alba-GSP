@@ -224,6 +224,19 @@ textarea:focus {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
+.story-box2 {
+  background: #fff8ea;
+  color: var(--text-dark);
+  padding: 10px 20px;
+  border-radius: 20px;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+  text-decoration: none;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.story-box2:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
 /* ---------------- PAGINA CONTATTI ---------------- */
 .contact-page {
   display: flex;
@@ -254,6 +267,7 @@ textarea:focus {
 }
 
 /* ---------------- FOOTER ---------------- */
+
 footer {
   height: var(--footer-height);
   display: flex;
@@ -261,32 +275,34 @@ footer {
   justify-content: center;
   background: #fff8ea;
   border-top: 2px solid #6b1c8c;
-  padding: 10px 25px;
+  padding: 0 25px;
   position: relative;
-  z-index: 50;
-  flex-shrink: 0;
 }
 
 .footer-left,
+.footer-center,
 .footer-right {
+  display: flex;
+  align-items: center;
+}
+
+.footer-left {
   position: absolute;
+  left: 25px;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.footer-left {
-  left: 25px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.footer-center {
+  flex: 1;
+  justify-content: center;
 }
 
 .footer-right {
+  position: absolute;
   right: 25px;
-}
-
-.footer-center {
-  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .footer-logo {
@@ -301,23 +317,18 @@ footer {
 
 /* ---------------- THEME TOGGLE (funziona su tutti i device) ---------------- */
 #theme-toggle {
-  position: fixed !important;
-  bottom: -35px !important;
-  right: 18px !important;
-  width: 54px;
+   width: 54px;
   height: 54px;
   border-radius: 50%;
   background: var(--yellow);
   color: #2b2533;
   border: none;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
   cursor: pointer;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.18);
   transition: transform 0.14s ease, background 0.18s ease, box-shadow 0.18s ease;
-  -webkit-tap-highlight-color: transparent;
 }
 
 #theme-toggle:hover {
@@ -361,6 +372,12 @@ body.dark .story-box {
   box-shadow: 0 0 18px var(--violet-2);
 }
 
+body.dark .story-box2 {
+  background: #2b2533;
+  color: var(--violet-1);
+  box-shadow: 0 0 18px var(--violet-2);
+}
+
 body.dark footer {
   background: #3c3645;
   border-top: 2px solid var(--violet-2);
@@ -399,6 +416,7 @@ body.dark #theme-toggle {
 
 /* ---------------- PERFORMANCE ---------------- */
 .story-box,
+.story-box2
 .send-btn,
 #theme-toggle {
   will-change: transform;
